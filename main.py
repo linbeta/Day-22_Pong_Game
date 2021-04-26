@@ -1,9 +1,8 @@
-from turtle import Screen, Turtle
+from turtle import Screen
 from paddle import Paddle
 from ball import Ball
 from scoreboard import ScoreBoard
-import time
-
+# import time
 
 screen = Screen()
 screen.setup(width=800, height=400)
@@ -21,8 +20,8 @@ screen.onkeypress(key="Up", fun=right_paddle.move_up)
 screen.onkeypress(key="Down", fun=right_paddle.move_down)
 
 # Use W and S keys to move the left_paddle
-screen.onkeypress(key="w", fun=left_paddle.move_up)
-screen.onkeypress(key="s", fun=left_paddle.move_down)
+# screen.onkeypress(key="w", fun=left_paddle.move_up)
+# screen.onkeypress(key="s", fun=left_paddle.move_down)
 
 # A ball pop-up at the center and move toward the upper-right corner.
 ball = Ball()
@@ -34,8 +33,9 @@ game_is_on = True
 while game_is_on:
     # time.sleep(0.1)
     screen.update()
-    # time.sleep(0.05)
     ball.move()
+    # set the left paddle to auto-mode(control by computer)
+    left_paddle.computer()
     if ball.ycor() > 190 or ball.ycor() < -180:
         ball.wall_bounce()
     elif ball.distance(right_paddle.pos()) < 50 and ball.xcor() > 340:
@@ -47,11 +47,13 @@ while game_is_on:
         score_board.left_score += 1
         score_board.refresh()
         ball.reset_position()
+        left_paddle.reset_position()
     elif ball.xcor() < -405:
         # Right wins, score +1
         score_board.right_score += 1
         score_board.refresh()
         ball.reset_position()
+        left_paddle.reset_position()
 
 
 # Draw a center line

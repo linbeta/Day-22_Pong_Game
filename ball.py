@@ -2,6 +2,7 @@ from turtle import Turtle
 import time
 BALL_SPEED = 0.02
 
+
 class Ball(Turtle):
     def __init__(self):
         super().__init__()
