@@ -12,7 +12,7 @@ class Paddle(Turtle):
         self.shapesize(stretch_len=1, stretch_wid=5)
         self.speed("fastest")
         self.goto(position)
-        self.auto_ud = 28
+        self.auto_ud = 20
         self.auto_speed = AUTO_SPEED
 
     def move_up(self):
@@ -43,9 +43,9 @@ class Paddle(Turtle):
 
     def computer(self, ball_position):
         ball_y = ball_position[1]
-        if ball_y > 0:
+        if ball_y > self.ycor():
             self.auto_up()
-        elif ball_y < 0:
+        elif ball_y < self.ycor():
             self.auto_down()
 
     def reset_position(self):
