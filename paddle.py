@@ -1,4 +1,5 @@
 from turtle import Turtle
+import random
 AUTO_SPEED = 0.01
 
 
@@ -11,31 +12,41 @@ class Paddle(Turtle):
         self.shapesize(stretch_len=1, stretch_wid=5)
         self.speed("fastest")
         self.goto(position)
-        self.auto_ud = 30
+        self.auto_ud = 28
         self.auto_speed = AUTO_SPEED
 
     def move_up(self):
         if self.ycor() > 140:
             pass
         else:
-            self.goto(self.xcor(), self.ycor() + 20)
+            self.goto(self.xcor(), self.ycor() + 25)
 
     def move_down(self):
         if self.ycor() < -130:
             pass
         else:
-            self.goto(self.xcor(), self.ycor() - 20)
+            self.goto(self.xcor(), self.ycor() - 25)
 
-    def auto_up_down(self):
-        new_y = self.ycor() + self.auto_ud * self.auto_speed
-        self.goto(self.xcor(), new_y)
+    def auto_up(self):
+        if self.ycor() > 140:
+            pass
+        else:
+            new_y = self.ycor() + self.auto_ud * self.auto_speed
+            self.goto(self.xcor(), new_y)
 
-    def computer(self):
-        self.auto_up_down()
-        if self.ycor() > 150:
-            self.auto_ud *= -1
-        elif self.ycor() < -150:
-            self.auto_ud *= -1
+    def auto_down(self):
+        if self.ycor() < -130:
+            pass
+        else:
+            new_y = self.ycor() - self.auto_ud * self.auto_speed
+            self.goto(self.xcor(), new_y)
+
+    def computer(self, ball_position):
+        ball_y = ball_position[1]
+        if ball_y > 0:
+            self.auto_up()
+        elif ball_y < 0:
+            self.auto_down()
 
     def reset_position(self):
         self.auto_speed = AUTO_SPEED

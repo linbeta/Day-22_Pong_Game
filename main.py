@@ -35,12 +35,12 @@ while game_is_on:
     screen.update()
     ball.move()
     # set the left paddle to auto-mode(control by computer)
-    left_paddle.computer()
+    left_paddle.computer(ball.pos())
     if ball.ycor() > 190 or ball.ycor() < -180:
         ball.wall_bounce()
-    elif ball.distance(right_paddle.pos()) < 50 and ball.xcor() > 340:
+    elif ball.distance(right_paddle.pos()) < 52 and ball.xcor() > 340:
         ball.collision_paddle()
-    elif ball.distance(left_paddle.pos()) < 50 and ball.xcor() < -355:
+    elif ball.distance(left_paddle.pos()) < 52 and ball.xcor() < -355:
         ball.collision_paddle()
     elif ball.xcor() > 400:
         # Left wins, score +1
